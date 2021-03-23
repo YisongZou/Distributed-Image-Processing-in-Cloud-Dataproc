@@ -1,5 +1,5 @@
 # Distributed Image Processing in Cloud Dataproc 
-[Qwiklab Link click here](https://www.qwiklabs.com/focuses/5834?parent=catalog)
+[Reference Qwiklab Link click here](https://www.qwiklabs.com/focuses/5834?parent=catalog)
 ##### The lab results(The contents of the cloud bucket) are inside the bucketContent directory
 ```
 Overview
