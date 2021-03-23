@@ -1,5 +1,6 @@
 # Distributed Image Processing in Cloud Dataproc 
 [Qwiklab Link click here](https://www.qwiklabs.com/focuses/5834?parent=catalog)
+The lab results(The contents of the cloud bucket) are inside the bucketContent directory
 ```
 Overview
 In this hands-on lab, you will learn how to use Apache Spark on Cloud Dataproc to distribute a computationally intensive image processing task onto a cluster of machines. This lab is part of a series of labs on processing scientific data.
