@@ -1,0 +1,20 @@
+21/03/23 02:06:55 INFO org.sparkproject.jetty.util.log: Logging initialized @4123ms to org.sparkproject.jetty.util.log.Slf4jLog
+21/03/23 02:06:56 INFO org.sparkproject.jetty.server.Server: jetty-9.4.36.v20210114; built: 2021-01-14T16:44:28.689Z; git: 238ec6997c7806b055319a6d11f8ae7564adc0de; jvm 1.8.0_282-b08
+21/03/23 02:06:56 INFO org.sparkproject.jetty.server.Server: Started @4444ms
+21/03/23 02:06:56 INFO org.sparkproject.jetty.server.AbstractConnector: Started ServerConnector@4482469c{HTTP/1.1, (http/1.1)}{0.0.0.0:32879}
+21/03/23 02:06:57 INFO org.apache.hadoop.yarn.client.RMProxy: Connecting to ResourceManager at student-00-a35f8972365f-qwiklab-m/10.128.0.9:8032
+21/03/23 02:06:57 INFO org.apache.hadoop.yarn.client.AHSProxy: Connecting to Application History server at student-00-a35f8972365f-qwiklab-m/10.128.0.9:10200
+21/03/23 02:06:58 INFO org.apache.hadoop.conf.Configuration: resource-types.xml not found
+21/03/23 02:06:58 INFO org.apache.hadoop.yarn.util.resource.ResourceUtils: Unable to find 'resource-types.xml'.
+21/03/23 02:07:00 INFO org.apache.hadoop.yarn.client.api.impl.YarnClientImpl: Submitted application application_1616465069452_0001
+21/03/23 02:07:01 INFO org.apache.hadoop.yarn.client.RMProxy: Connecting to ResourceManager at student-00-a35f8972365f-qwiklab-m/10.128.0.9:8030
+Number of files found: 3
+
+
+
+The output files can be found at gs://student-00-a35f8972365f-image-605/out/
+Total time: 13999 milliseconds.
+
+
+
+21/03/23 02:07:18 INFO org.sparkproject.jetty.server.AbstractConnector: Stopped Spark@4482469c{HTTP/1.1, (http/1.1)}{0.0.0.0:0}

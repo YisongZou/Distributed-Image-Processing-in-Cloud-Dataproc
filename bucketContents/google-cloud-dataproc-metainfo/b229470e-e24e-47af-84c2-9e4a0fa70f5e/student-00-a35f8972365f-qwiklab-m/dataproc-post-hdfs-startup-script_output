@@ -1,0 +1,813 @@
++ source /usr/local/share/google/dataproc/bdutil/bdutil_env.sh
+++ [[ /opt/conda/default/bin:/opt/conda/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin == *:/snap/bin* ]]
+++ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+++ DATAPROC_DIR=/usr/local/share/google/dataproc
+++ DATAPROC_TMP_DIR=/tmp/dataproc
+++ DATAPROC_COMMON_LIB_DIR=/usr/local/share/google/dataproc/lib
+++ DATAPROC_ARTIFACTS_DIR=/usr/local/share/google/dataproc/artifacts
+++ DATAPROC_CONF_DIR=/usr/local/share/google/dataproc/conf
+++ DATAPROC_METADATA_CONF=/usr/local/share/google/dataproc/conf/dataproc_metadata.sh
+++ COMMANDS_TMP_DIR=/tmp/dataproc/commands
+++ DATAPROC_COMPONENTS_TMP_DIR=/tmp/dataproc/components
+++ COMPONENTS_TO_ACTIVATE_ENV=/usr/local/share/google/dataproc/bdutil/components/components_to_activate_env.sh
+++ [[ -f /usr/local/share/google/dataproc/conf/dataproc_metadata.sh ]]
+++ INSTALL_GCS_CONNECTOR=1
+++ INSTALL_BIGQUERY_CONNECTOR=1
+++ ENABLE_HDFS=1
+++ ENABLE_HDFS_PERMISSIONS=false
+++ HADOOP_INSTALL_DIR=/usr/lib/hadoop
+++ HADOOP_LIB_DIR=/usr/lib/hadoop/lib
+++ HADOOP_CONF_DIR=/etc/hadoop/conf
+++ HADOOP_MASTER_MAPREDUCE_MEMORY_FRACTION=0.4
+++ HDFS_MASTER_MEMORY_FRACTION=0.4
+++ NODEMANAGER_MEMORY_FRACTION=0.8
+++ NUM_WORKERS=10
+++ WORKERS=()
+++ CORES_PER_MAP_TASK=1.0
+++ CORES_PER_REDUCE_TASK=2.0
+++ CORES_PER_APP_MASTER=2.0
+++ HDFS_DATA_DIRS_PERM=700
+++ [[ -d /usr/lib/jvm/adoptopenjdk-8-hotspot ]]
+++ [[ -d /usr/lib/jvm/adoptopenjdk-8-hotspot-amd64 ]]
+++ JAVA_HOME=/usr/lib/jvm/adoptopenjdk-8-hotspot-amd64
+++ SPARK_CONF_DIR=/etc/spark/conf
+++ SPARK_WORKER_MEMORY_FRACTION=0.8
+++ SPARK_EXECUTOR_MEMORY_FRACTION=0.8
+++ SPARK_DAEMON_MEMORY_FRACTION=0.15
+++ SPARK_EXECUTORS_PER_VM=2
+++ TEZ_CONF_DIR=/etc/tez/conf
+++ TEZ_LIB_DIR=/usr/lib/tez
++ source /usr/local/share/google/dataproc/bdutil/bdutil_helpers.sh
+++ is_centos
++++ . /etc/os-release
+++++ PRETTY_NAME='Debian GNU/Linux 10 (buster)'
+++++ NAME='Debian GNU/Linux'
+++++ VERSION_ID=10
+++++ VERSION='10 (buster)'
+++++ VERSION_CODENAME=buster
+++++ ID=debian
+++++ HOME_URL=https://www.debian.org/
+++++ SUPPORT_URL=https://www.debian.org/support
+++++ BUG_REPORT_URL=https://bugs.debian.org/
++++ echo debian
+++ [[ debian == \c\e\n\t\o\s ]]
+++ return 1
+++ source /usr/local/share/google/dataproc/bdutil/os/debian/bdutil_helpers.sh
++++ APT_SENTINEL=apt.lastupdate
+++ readonly EXIT_CODE_INTERNAL_ERROR=1
+++ EXIT_CODE_INTERNAL_ERROR=1
+++ readonly EXIT_CODE_CLIENT_ERROR=2
+++ EXIT_CODE_CLIENT_ERROR=2
++ source /usr/local/share/google/dataproc/bdutil/cluster_properties.sh
++ source /usr/local/share/google/dataproc/bdutil/components/components-helpers.sh
++ source /usr/local/share/google/dataproc/bdutil/components/startup-script-components.sh
++ source /usr/local/share/google/dataproc/bdutil/components/components_to_activate_env.sh
+++ set -aeuxo pipefail
+++ COMPONENTS_TO_ACTIVATE='hdfs hive-metastore hive-server2 mapreduce miniconda3 mysql spark yarn'
+++ HDFS_ENABLED=true
+++ ROLE=Master
+++ MASTER_INDEX=0
+++ set +a
++ run_with_logger --tag google-dataproc-startup
++ local tag=
++ local pid=10691
++ [[ --tag == \-\-\t\a\g ]]
++ tag=google-dataproc-startup
++ shift 2
++ [[ 0 -eq 0 ]]
++ exec
+++ logger -s -t 'google-dataproc-startup[10691]'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + BACKGROUND_PROCESSES=()
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + BACKGROUND_COMMANDS=()
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + cd /tmp
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + trap logstacktrace ERR
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + loginfo 'Starting Dataproc post-hdfs startup script'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Starting Dataproc post-hdfs startup script'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Starting Dataproc post-hdfs startup script
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + COMPONENTS_TO_ACTIVATE_ARRAY=(${COMPONENTS_TO_ACTIVATE})
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + post_hdfs_activate_components hdfs hive-metastore hive-server2 mapreduce miniconda3 mysql spark yarn
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + components=("$@")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local components
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + mkdir -p /tmp/dataproc/components/post-hdfs
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + for component in "${components[@]}"
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + loginfo 'Activating post-hdfs component hdfs'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Activating post-hdfs component hdfs'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Activating post-hdfs component hdfs
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + run_in_background --tag post-hdfs-activate-component-hdfs post_hdfs_activate_component hdfs
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local -r pid=10698
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + BACKGROUND_PROCESSES=("${pid}" "${BACKGROUND_PROCESSES[@]}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ --tag == \-\-\t\a\g ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + shift 2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + BACKGROUND_COMMANDS=("$*" "${BACKGROUND_COMMANDS[@]}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Started background process [post_hdfs_activate_component hdfs] as pid 10698'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Started background process [post_hdfs_activate_component hdfs] as pid 10698
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + for component in "${components[@]}"
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + loginfo 'Activating post-hdfs component hive-metastore'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Activating post-hdfs component hive-metastore'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Activating post-hdfs component hive-metastore
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + run_in_background --tag post-hdfs-activate-component-hive-metastore post_hdfs_activate_component hive-metastore
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local -r pid=10699
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + BACKGROUND_PROCESSES=("${pid}" "${BACKGROUND_PROCESSES[@]}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ --tag == \-\-\t\a\g ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + shift 2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + BACKGROUND_COMMANDS=("$*" "${BACKGROUND_COMMANDS[@]}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Started background process [post_hdfs_activate_component hive-metastore] as pid 10699'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Started background process [post_hdfs_activate_component hive-metastore] as pid 10699
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + for component in "${components[@]}"
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + loginfo 'Activating post-hdfs component hive-server2'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Activating post-hdfs component hive-server2'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Activating post-hdfs component hive-server2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + run_in_background --tag post-hdfs-activate-component-hive-server2 post_hdfs_activate_component hive-server2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local -r pid=10700
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + BACKGROUND_PROCESSES=("${pid}" "${BACKGROUND_PROCESSES[@]}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ --tag == \-\-\t\a\g ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + shift 2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + BACKGROUND_COMMANDS=("$*" "${BACKGROUND_COMMANDS[@]}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Started background process [post_hdfs_activate_component hive-server2] as pid 10700'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Started background process [post_hdfs_activate_component hive-server2] as pid 10700
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + for component in "${components[@]}"
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + loginfo 'Activating post-hdfs component mapreduce'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Activating post-hdfs component mapreduce'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Activating post-hdfs component mapreduce
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + run_in_background --tag post-hdfs-activate-component-mapreduce post_hdfs_activate_component mapreduce
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local -r pid=10701
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + BACKGROUND_PROCESSES=("${pid}" "${BACKGROUND_PROCESSES[@]}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ --tag == \-\-\t\a\g ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + shift 2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + BACKGROUND_COMMANDS=("$*" "${BACKGROUND_COMMANDS[@]}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Started background process [post_hdfs_activate_component mapreduce] as pid 10701'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Started background process [post_hdfs_activate_component mapreduce] as pid 10701
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + for component in "${components[@]}"
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + loginfo 'Activating post-hdfs component miniconda3'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Activating post-hdfs component miniconda3'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Activating post-hdfs component miniconda3
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + run_in_background --tag post-hdfs-activate-component-miniconda3 post_hdfs_activate_component miniconda3
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local -r pid=10702
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + BACKGROUND_PROCESSES=("${pid}" "${BACKGROUND_PROCESSES[@]}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ --tag == \-\-\t\a\g ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + shift 2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + BACKGROUND_COMMANDS=("$*" "${BACKGROUND_COMMANDS[@]}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Started background process [post_hdfs_activate_component miniconda3] as pid 10702'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Started background process [post_hdfs_activate_component miniconda3] as pid 10702
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + for component in "${components[@]}"
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + loginfo 'Activating post-hdfs component mysql'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Activating post-hdfs component mysql'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Activating post-hdfs component mysql
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + run_in_background --tag post-hdfs-activate-component-mysql post_hdfs_activate_component mysql
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local -r pid=10703
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + BACKGROUND_PROCESSES=("${pid}" "${BACKGROUND_PROCESSES[@]}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ --tag == \-\-\t\a\g ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + shift 2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + BACKGROUND_COMMANDS=("$*" "${BACKGROUND_COMMANDS[@]}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Started background process [post_hdfs_activate_component mysql] as pid 10703'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Started background process [post_hdfs_activate_component mysql] as pid 10703
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + for component in "${components[@]}"
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + loginfo 'Activating post-hdfs component spark'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Activating post-hdfs component spark'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Activating post-hdfs component spark
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + run_in_background --tag post-hdfs-activate-component-spark post_hdfs_activate_component spark
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local -r pid=10705
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + BACKGROUND_PROCESSES=("${pid}" "${BACKGROUND_PROCESSES[@]}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ --tag == \-\-\t\a\g ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + shift 2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + BACKGROUND_COMMANDS=("$*" "${BACKGROUND_COMMANDS[@]}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Started background process [post_hdfs_activate_component spark] as pid 10705'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Started background process [post_hdfs_activate_component spark] as pid 10705
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + run_with_logger --tag post-hdfs-activate-component-hive-metastore post_hdfs_activate_component hive-metastore
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + for component in "${components[@]}"
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + loginfo 'Activating post-hdfs component yarn'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Activating post-hdfs component yarn'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Activating post-hdfs component yarn
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + run_in_background --tag post-hdfs-activate-component-yarn post_hdfs_activate_component yarn
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local tag=
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local pid=10699
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ --tag == \-\-\t\a\g ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + tag=post-hdfs-activate-component-hive-metastore
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + shift 2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ 2 -eq 0 ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + post_hdfs_activate_component hive-metastore
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local -r pid=10706
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + BACKGROUND_PROCESSES=("${pid}" "${BACKGROUND_PROCESSES[@]}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ --tag == \-\-\t\a\g ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + shift 2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + BACKGROUND_COMMANDS=("$*" "${BACKGROUND_COMMANDS[@]}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Started background process [post_hdfs_activate_component yarn] as pid 10706'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Started background process [post_hdfs_activate_component yarn] as pid 10706
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + wait_on_async_processes
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + loginfo 'Waiting on async processes'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Waiting on async processes'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Waiting on async processes
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + (( i = 0 ))
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + (( i < 8 ))
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local pid=10706
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local 'cmd=post_hdfs_activate_component yarn'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + loginfo 'Waiting on pid=10706 cmd=[post_hdfs_activate_component yarn]'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Waiting on pid=10706 cmd=[post_hdfs_activate_component yarn]'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Waiting on pid=10706 cmd=[post_hdfs_activate_component yarn]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'post_hdfs_activate_component yarn'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + run_with_logger --tag post-hdfs-activate-component-mapreduce post_hdfs_activate_component mapreduce
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local tag=
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local pid=10701
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ --tag == \-\-\t\a\g ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + tag=post-hdfs-activate-component-mapreduce
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + shift 2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local status=0
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ 2 -eq 0 ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + wait 10706
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + post_hdfs_activate_component mapreduce
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + run_with_logger --tag post-hdfs-activate-component-spark post_hdfs_activate_component spark
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local tag=
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local pid=10705
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ --tag == \-\-\t\a\g ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + tag=post-hdfs-activate-component-spark
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + shift 2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ 2 -eq 0 ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + post_hdfs_activate_component spark
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + run_with_logger --tag post-hdfs-activate-component-mysql post_hdfs_activate_component mysql
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local tag=
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local pid=10703
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ --tag == \-\-\t\a\g ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + tag=post-hdfs-activate-component-mysql
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + shift 2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ 2 -eq 0 ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + post_hdfs_activate_component mysql
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + run_with_logger --tag post-hdfs-activate-component-miniconda3 post_hdfs_activate_component miniconda3
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + run_with_logger --tag post-hdfs-activate-component-yarn post_hdfs_activate_component yarn
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local tag=
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local tag=
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local pid=10706
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local pid=10702
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ --tag == \-\-\t\a\g ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ --tag == \-\-\t\a\g ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + tag=post-hdfs-activate-component-miniconda3
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + tag=post-hdfs-activate-component-yarn
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + shift 2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + shift 2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ 2 -eq 0 ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ 2 -eq 0 ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + post_hdfs_activate_component miniconda3
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + post_hdfs_activate_component yarn
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + run_with_logger --tag post-hdfs-activate-component-hive-server2 post_hdfs_activate_component hive-server2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local tag=
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local pid=10700
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ --tag == \-\-\t\a\g ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + tag=post-hdfs-activate-component-hive-server2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + shift 2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ 2 -eq 0 ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + post_hdfs_activate_component hive-server2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: ++ logger -s -t 'post-hdfs-activate-component-hive-metastore[10699]'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + (( status != 0 ))
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: ++ logger -s -t 'post-hdfs-activate-component-spark[10705]'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: ++ logger -s -t 'post-hdfs-activate-component-mysql[10703]'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + tee /tmp/dataproc/commands/10706.done
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + run_with_logger --tag post-hdfs-activate-component-hdfs post_hdfs_activate_component hdfs
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local tag=
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local pid=10698
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ --tag == \-\-\t\a\g ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + tag=post-hdfs-activate-component-hdfs
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + shift 2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + [[ 2 -eq 0 ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + post_hdfs_activate_component hdfs
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: ++ logger -s -t 'post-hdfs-activate-component-hive-server2[10700]'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-mysql[10703]: + local -r component=mysql
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-mysql[10703]: + local -r post_hdfs_script=/usr/local/share/google/dataproc/bdutil/components/post-hdfs/mysql.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-mysql[10703]: + [[ -f /usr/local/share/google/dataproc/bdutil/components/post-hdfs/mysql.sh ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-mysql[10703]: + echo 'Component mysql doesn'\''t have a post-hdfs script'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-mysql[10703]: Component mysql doesn't have a post-hdfs script
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: ++ logger -s -t 'post-hdfs-activate-component-mapreduce[10701]'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: ++ logger -s -t 'post-hdfs-activate-component-hdfs[10698]'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: ++ logger -s -t 'post-hdfs-activate-component-miniconda3[10702]'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local -r component=hive-server2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local -r post_hdfs_script=/usr/local/share/google/dataproc/bdutil/components/post-hdfs/hive-server2.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + [[ -f /usr/local/share/google/dataproc/bdutil/components/post-hdfs/hive-server2.sh ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + echo 'Running component activate post-hdfs script: /usr/local/share/google/dataproc/bdutil/components/post-hdfs/hive-server2.sh'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: Running component activate post-hdfs script: /usr/local/share/google/dataproc/bdutil/components/post-hdfs/hive-server2.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + touch /tmp/dataproc/components/post-hdfs/hive-server2.running
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local exit_code=0
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + bash -ex /usr/local/share/google/dataproc/bdutil/components/post-hdfs/hive-server2.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + set -euxo pipefail
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hdfs[10698]: + local -r component=hdfs
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hdfs[10698]: + local -r post_hdfs_script=/usr/local/share/google/dataproc/bdutil/components/post-hdfs/hdfs.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hdfs[10698]: + [[ -f /usr/local/share/google/dataproc/bdutil/components/post-hdfs/hdfs.sh ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hdfs[10698]: + echo 'Component hdfs doesn'\''t have a post-hdfs script'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hdfs[10698]: Component hdfs doesn't have a post-hdfs script
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-mapreduce[10701]: + local -r component=mapreduce
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-mapreduce[10701]: + local -r post_hdfs_script=/usr/local/share/google/dataproc/bdutil/components/post-hdfs/mapreduce.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-mapreduce[10701]: + [[ -f /usr/local/share/google/dataproc/bdutil/components/post-hdfs/mapreduce.sh ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-mapreduce[10701]: + echo 'Component mapreduce doesn'\''t have a post-hdfs script'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-mapreduce[10701]: Component mapreduce doesn't have a post-hdfs script
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ dirname /usr/local/share/google/dataproc/bdutil/components/post-hdfs/hive-server2.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Command cmd=[post_hdfs_activate_component yarn] pid=10706 exited with 0'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Command cmd=[post_hdfs_activate_component yarn] pid=10706 exited with 0
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + (( ++i ))
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + (( i < 8 ))
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local pid=10705
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local 'cmd=post_hdfs_activate_component spark'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + loginfo 'Waiting on pid=10705 cmd=[post_hdfs_activate_component spark]'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'Waiting on pid=10705 cmd=[post_hdfs_activate_component spark]'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: Waiting on pid=10705 cmd=[post_hdfs_activate_component spark]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + echo 'post_hdfs_activate_component spark'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: ++ logger -s -t 'post-hdfs-activate-component-yarn[10706]'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + local status=0
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: + wait 10705
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + source /usr/local/share/google/dataproc/bdutil/components/post-hdfs/../../bdutil_env.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ [[ /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin == *:/snap/bin* ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ DATAPROC_DIR=/usr/local/share/google/dataproc
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ DATAPROC_TMP_DIR=/tmp/dataproc
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ DATAPROC_COMMON_LIB_DIR=/usr/local/share/google/dataproc/lib
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ DATAPROC_ARTIFACTS_DIR=/usr/local/share/google/dataproc/artifacts
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ DATAPROC_CONF_DIR=/usr/local/share/google/dataproc/conf
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ DATAPROC_METADATA_CONF=/usr/local/share/google/dataproc/conf/dataproc_metadata.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ COMMANDS_TMP_DIR=/tmp/dataproc/commands
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ DATAPROC_COMPONENTS_TMP_DIR=/tmp/dataproc/components
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ COMPONENTS_TO_ACTIVATE_ENV=/usr/local/share/google/dataproc/bdutil/components/components_to_activate_env.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ [[ -f /usr/local/share/google/dataproc/conf/dataproc_metadata.sh ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ INSTALL_GCS_CONNECTOR=1
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ INSTALL_BIGQUERY_CONNECTOR=1
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ ENABLE_HDFS=1
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ ENABLE_HDFS_PERMISSIONS=false
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ HADOOP_INSTALL_DIR=/usr/lib/hadoop
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ HADOOP_LIB_DIR=/usr/lib/hadoop/lib
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: + local -r component=spark
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: + local -r post_hdfs_script=/usr/local/share/google/dataproc/bdutil/components/post-hdfs/spark.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: + [[ -f /usr/local/share/google/dataproc/bdutil/components/post-hdfs/spark.sh ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: + echo 'Running component activate post-hdfs script: /usr/local/share/google/dataproc/bdutil/components/post-hdfs/spark.sh'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: Running component activate post-hdfs script: /usr/local/share/google/dataproc/bdutil/components/post-hdfs/spark.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: + touch /tmp/dataproc/components/post-hdfs/spark.running
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: + local exit_code=0
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: + bash -ex /usr/local/share/google/dataproc/bdutil/components/post-hdfs/spark.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ HADOOP_CONF_DIR=/etc/hadoop/conf
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ HADOOP_MASTER_MAPREDUCE_MEMORY_FRACTION=0.4
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ HDFS_MASTER_MEMORY_FRACTION=0.4
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ NODEMANAGER_MEMORY_FRACTION=0.8
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ NUM_WORKERS=10
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ WORKERS=()
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ CORES_PER_MAP_TASK=1.0
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ CORES_PER_REDUCE_TASK=2.0
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ CORES_PER_APP_MASTER=2.0
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ HDFS_DATA_DIRS_PERM=700
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ [[ -d /usr/lib/jvm/adoptopenjdk-8-hotspot ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ [[ -d /usr/lib/jvm/adoptopenjdk-8-hotspot-amd64 ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ JAVA_HOME=/usr/lib/jvm/adoptopenjdk-8-hotspot-amd64
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ SPARK_CONF_DIR=/etc/spark/conf
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ SPARK_WORKER_MEMORY_FRACTION=0.8
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ SPARK_EXECUTOR_MEMORY_FRACTION=0.8
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ SPARK_DAEMON_MEMORY_FRACTION=0.15
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ SPARK_EXECUTORS_PER_VM=2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ TEZ_CONF_DIR=/etc/tez/conf
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ TEZ_LIB_DIR=/usr/lib/tez
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-yarn[10706]: + local -r component=yarn
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-yarn[10706]: + local -r post_hdfs_script=/usr/local/share/google/dataproc/bdutil/components/post-hdfs/yarn.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-yarn[10706]: + [[ -f /usr/local/share/google/dataproc/bdutil/components/post-hdfs/yarn.sh ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-yarn[10706]: + echo 'Component yarn doesn'\''t have a post-hdfs script'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-yarn[10706]: Component yarn doesn't have a post-hdfs script
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ dirname /usr/local/share/google/dataproc/bdutil/components/post-hdfs/hive-server2.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-miniconda3[10702]: + local -r component=miniconda3
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-miniconda3[10702]: + local -r post_hdfs_script=/usr/local/share/google/dataproc/bdutil/components/post-hdfs/miniconda3.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-miniconda3[10702]: + [[ -f /usr/local/share/google/dataproc/bdutil/components/post-hdfs/miniconda3.sh ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-miniconda3[10702]: + echo 'Component miniconda3 doesn'\''t have a post-hdfs script'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-miniconda3[10702]: Component miniconda3 doesn't have a post-hdfs script
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + source /usr/local/share/google/dataproc/bdutil/components/post-hdfs/../../bdutil_helpers.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ is_centos
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: +++ . /etc/os-release
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-metastore[10699]: + local -r component=hive-metastore
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++++ PRETTY_NAME='Debian GNU/Linux 10 (buster)'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-metastore[10699]: + local -r post_hdfs_script=/usr/local/share/google/dataproc/bdutil/components/post-hdfs/hive-metastore.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-metastore[10699]: + [[ -f /usr/local/share/google/dataproc/bdutil/components/post-hdfs/hive-metastore.sh ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++++ NAME='Debian GNU/Linux'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-metastore[10699]: + echo 'Component hive-metastore doesn'\''t have a post-hdfs script'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-metastore[10699]: Component hive-metastore doesn't have a post-hdfs script
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++++ VERSION_ID=10
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++++ VERSION='10 (buster)'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++++ VERSION_CODENAME=buster
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++++ ID=debian
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++++ HOME_URL=https://www.debian.org/
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++++ SUPPORT_URL=https://www.debian.org/support
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++++ BUG_REPORT_URL=https://bugs.debian.org/
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: +++ echo debian
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: + set -euxo pipefail
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ [[ debian == \c\e\n\t\o\s ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ return 1
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ source /usr/local/share/google/dataproc/bdutil/os/debian/bdutil_helpers.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: +++ APT_SENTINEL=apt.lastupdate
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ readonly EXIT_CODE_INTERNAL_ERROR=1
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ EXIT_CODE_INTERNAL_ERROR=1
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ readonly EXIT_CODE_CLIENT_ERROR=2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ EXIT_CODE_CLIENT_ERROR=2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ dirname /usr/local/share/google/dataproc/bdutil/components/post-hdfs/spark.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: + source /usr/local/share/google/dataproc/bdutil/components/post-hdfs/../../bdutil_env.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ [[ /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin == *:/snap/bin* ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ DATAPROC_DIR=/usr/local/share/google/dataproc
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ DATAPROC_TMP_DIR=/tmp/dataproc
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ DATAPROC_COMMON_LIB_DIR=/usr/local/share/google/dataproc/lib
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ DATAPROC_ARTIFACTS_DIR=/usr/local/share/google/dataproc/artifacts
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ DATAPROC_CONF_DIR=/usr/local/share/google/dataproc/conf
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ DATAPROC_METADATA_CONF=/usr/local/share/google/dataproc/conf/dataproc_metadata.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ COMMANDS_TMP_DIR=/tmp/dataproc/commands
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ DATAPROC_COMPONENTS_TMP_DIR=/tmp/dataproc/components
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ COMPONENTS_TO_ACTIVATE_ENV=/usr/local/share/google/dataproc/bdutil/components/components_to_activate_env.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ [[ -f /usr/local/share/google/dataproc/conf/dataproc_metadata.sh ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ INSTALL_GCS_CONNECTOR=1
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ INSTALL_BIGQUERY_CONNECTOR=1
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ ENABLE_HDFS=1
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ ENABLE_HDFS_PERMISSIONS=false
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ HADOOP_INSTALL_DIR=/usr/lib/hadoop
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ HADOOP_LIB_DIR=/usr/lib/hadoop/lib
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ HADOOP_CONF_DIR=/etc/hadoop/conf
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ HADOOP_MASTER_MAPREDUCE_MEMORY_FRACTION=0.4
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ HDFS_MASTER_MEMORY_FRACTION=0.4
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ NODEMANAGER_MEMORY_FRACTION=0.8
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ NUM_WORKERS=10
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ WORKERS=()
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ CORES_PER_MAP_TASK=1.0
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ CORES_PER_REDUCE_TASK=2.0
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ CORES_PER_APP_MASTER=2.0
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ HDFS_DATA_DIRS_PERM=700
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ [[ -d /usr/lib/jvm/adoptopenjdk-8-hotspot ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ [[ -d /usr/lib/jvm/adoptopenjdk-8-hotspot-amd64 ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ JAVA_HOME=/usr/lib/jvm/adoptopenjdk-8-hotspot-amd64
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ SPARK_CONF_DIR=/etc/spark/conf
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ SPARK_WORKER_MEMORY_FRACTION=0.8
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ SPARK_EXECUTOR_MEMORY_FRACTION=0.8
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ SPARK_DAEMON_MEMORY_FRACTION=0.15
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ SPARK_EXECUTORS_PER_VM=2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ TEZ_CONF_DIR=/etc/tez/conf
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ TEZ_LIB_DIR=/usr/lib/tez
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ dirname /usr/local/share/google/dataproc/bdutil/components/post-hdfs/hive-server2.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ dirname /usr/local/share/google/dataproc/bdutil/components/post-hdfs/spark.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + source /usr/local/share/google/dataproc/bdutil/components/post-hdfs/../../cluster_properties.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: + source /usr/local/share/google/dataproc/bdutil/components/post-hdfs/../../bdutil_helpers.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ is_centos
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ dirname /usr/local/share/google/dataproc/bdutil/components/post-hdfs/hive-server2.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: +++ . /etc/os-release
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++++ PRETTY_NAME='Debian GNU/Linux 10 (buster)'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++++ NAME='Debian GNU/Linux'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++++ VERSION_ID=10
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++++ VERSION='10 (buster)'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++++ VERSION_CODENAME=buster
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++++ ID=debian
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++++ HOME_URL=https://www.debian.org/
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++++ SUPPORT_URL=https://www.debian.org/support
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++++ BUG_REPORT_URL=https://bugs.debian.org/
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: +++ echo debian
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ [[ debian == \c\e\n\t\o\s ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ return 1
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ source /usr/local/share/google/dataproc/bdutil/os/debian/bdutil_helpers.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: +++ APT_SENTINEL=apt.lastupdate
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ readonly EXIT_CODE_INTERNAL_ERROR=1
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ EXIT_CODE_INTERNAL_ERROR=1
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ readonly EXIT_CODE_CLIENT_ERROR=2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ EXIT_CODE_CLIENT_ERROR=2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + source /usr/local/share/google/dataproc/bdutil/components/post-hdfs/../shared/hive.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ HIVE_CONF_DIR=/etc/hive/conf
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + [[ true == \t\r\u\e ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + start_hive_server2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + wait_for_hive_metastore
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local timeout
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ get_dataproc_property_or_default startup.component.service-binding-timeout.hive-metastore 300
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ local -r property_name=startup.component.service-binding-timeout.hive-metastore
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ local -r default_value=300
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ local actual_value
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: +++ get_dataproc_property startup.component.service-binding-timeout.hive-metastore
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: +++ local -r property_name=startup.component.service-binding-timeout.hive-metastore
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: +++ local property_value
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++++ get_java_property /etc/google-dataproc/dataproc.properties startup.component.service-binding-timeout.hive-metastore
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++++ local -r property_file=/etc/google-dataproc/dataproc.properties
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++++ local -r property_name=startup.component.service-binding-timeout.hive-metastore
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++++ local property_value
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ dirname /usr/local/share/google/dataproc/bdutil/components/post-hdfs/spark.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: +++++ sed -r 's/\\([#!=:])/\1/g'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: + source /usr/local/share/google/dataproc/bdutil/components/post-hdfs/../../cluster_properties.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: +++++ cut -d = -f 2-
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: +++++ tail -n 1
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ dirname /usr/local/share/google/dataproc/bdutil/components/post-hdfs/spark.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: +++++ grep '^startup.component.service-binding-timeout.hive-metastore=' /etc/google-dataproc/dataproc.properties
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++++ property_value=
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++++ echo ''
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: + source /usr/local/share/google/dataproc/bdutil/components/post-hdfs/../shared/spark.sh
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: + set_log_tag post-hdfs-component-spark
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: + local -r tag=post-hdfs-component-spark
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: + exec
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: +++ property_value=
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: +++ echo ''
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ actual_value=
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ [[ -n '' ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ echo 300
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + timeout=300
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local metastore_uris
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: ++ logger -s -t 'post-hdfs-component-spark[10747]'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ get_property_in_xml /etc/hive/conf/hive-site.xml hive.metastore.uris
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ local -r path=/etc/hive/conf/hive-site.xml
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ local -r property=hive.metastore.uris
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ local -r default_value=
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ local val
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: +++ bdconfig get_property_value --configuration_file /etc/hive/conf/hive-site.xml --name hive.metastore.uris
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:42 post-hdfs-component-spark[10747]: + [[ true == \t\r\u\e ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:42 post-hdfs-component-spark[10747]: + [[ Master == \M\a\s\t\e\r ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:42 post-hdfs-component-spark[10747]: + [[ 0 == \0 ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:42 post-hdfs-component-spark[10747]: + start_spark_history_server
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:42 post-hdfs-component-spark[10747]: + enable_service spark-history-server
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:42 post-hdfs-component-spark[10747]: + local -r service=spark-history-server
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:42 post-hdfs-component-spark[10747]: + local -r unit=spark-history-server.service
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:42 post-hdfs-component-spark[10747]: + retry_constant_short systemctl enable spark-history-server.service
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:42 post-hdfs-component-spark[10747]: + retry_constant_custom 30 1 systemctl enable spark-history-server.service
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:42 post-hdfs-component-spark[10747]: + local -r max_retry_time=30
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:42 post-hdfs-component-spark[10747]: + local -r retry_delay=1
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:42 post-hdfs-component-spark[10747]: + cmd=("${@:3}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:42 post-hdfs-component-spark[10747]: + local -r cmd
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:42 post-hdfs-component-spark[10747]: + local -r max_retries=30
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:42 post-hdfs-component-spark[10747]: + set +x
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:42 post-hdfs-component-spark[10747]: About to run 'systemctl enable spark-history-server.service' with retries...
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:42 post-hdfs-component-spark[10747]: spark-history-server.service is not a native service, redirecting to systemd-sysv-install.
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:42 post-hdfs-component-spark[10747]: Executing: /lib/systemd/systemd-sysv-install enable spark-history-server
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ val=thrift://student-00-a35f8972365f-qwiklab-m:9083
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ [[ thrift://student-00-a35f8972365f-qwiklab-m:9083 == \N\o\n\e ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ echo thrift://student-00-a35f8972365f-qwiklab-m:9083
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + metastore_uris=thrift://student-00-a35f8972365f-qwiklab-m:9083
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local host
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ echo thrift://student-00-a35f8972365f-qwiklab-m:9083
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ sed -n 's#.*://\(.*\):.*#\1#p'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + host=student-00-a35f8972365f-qwiklab-m
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + [[ -z student-00-a35f8972365f-qwiklab-m ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local port
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ sed -n 's#.*://.*:\(.*\)#\1#p'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: ++ echo thrift://student-00-a35f8972365f-qwiklab-m:9083
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + port=9083
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + [[ -z 9083 ]]
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + wait_for_port hive-metastore student-00-a35f8972365f-qwiklab-m 9083 300
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local -r name=hive-metastore
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local -r host=student-00-a35f8972365f-qwiklab-m
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local -r port=9083
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local -r timeout=300
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local -r capped_timeout=300
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + loginfo 'Waiting 300 seconds for service to come up on host=student-00-a35f8972365f-qwiklab-m port=9083 name=hive-metastore.'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + echo 'Waiting 300 seconds for service to come up on host=student-00-a35f8972365f-qwiklab-m port=9083 name=hive-metastore.'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: Waiting 300 seconds for service to come up on host=student-00-a35f8972365f-qwiklab-m port=9083 name=hive-metastore.
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + retry_constant_custom 300 1 nc -v -z -w 1 student-00-a35f8972365f-qwiklab-m 9083
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local -r max_retry_time=300
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local -r retry_delay=1
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + cmd=("${@:3}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local -r cmd
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local -r max_retries=300
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + set +x
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: About to run 'nc -v -z -w 1 student-00-a35f8972365f-qwiklab-m 9083' with retries...
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: Connection to student-00-a35f8972365f-qwiklab-m 9083 port [tcp/*] succeeded!
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: nc -v -z -w 1 student-00-a35f8972365f-qwiklab-m 9083 succeeded.
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + return 0
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + loginfo 'Service up on host=student-00-a35f8972365f-qwiklab-m port=9083 name=hive-metastore.'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + echo 'Service up on host=student-00-a35f8972365f-qwiklab-m port=9083 name=hive-metastore.'
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: Service up on host=student-00-a35f8972365f-qwiklab-m port=9083 name=hive-metastore.
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + enable_service hive-server2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local -r service=hive-server2
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local -r unit=hive-server2.service
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + retry_constant_short systemctl enable hive-server2.service
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + retry_constant_custom 30 1 systemctl enable hive-server2.service
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local -r max_retry_time=30
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local -r retry_delay=1
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + cmd=("${@:3}")
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local -r cmd
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + local -r max_retries=30
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: + set +x
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: About to run 'systemctl enable hive-server2.service' with retries...
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: hive-server2.service is not a native service, redirecting to systemd-sysv-install.
+<13>Mar 23 02:05:42 google-dataproc-startup[10691]: <13>Mar 23 02:05:42 post-hdfs-activate-component-hive-server2[10700]: Executing: /lib/systemd/systemd-sysv-install enable hive-server2
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: systemctl enable spark-history-server.service succeeded.
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + return 0
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + local -r common_restart_drop_in=/etc/systemd/system/common/restart.conf
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + [[ ! -f /etc/systemd/system/common/restart.conf ]]
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + local -r worker_restart_drop_in=/etc/systemd/system/common/worker-restart.conf
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + [[ ! -f /etc/systemd/system/common/worker-restart.conf ]]
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + local -r drop_in_dir=/etc/systemd/system/spark-history-server.service.d
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + mkdir -p /etc/systemd/system/spark-history-server.service.d
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + local props
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: ++ systemctl show spark-history-server.service -p Restart,RemainAfterExit
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: systemctl enable hive-server2.service succeeded.
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + return 0
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + local -r common_restart_drop_in=/etc/systemd/system/common/restart.conf
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + [[ ! -f /etc/systemd/system/common/restart.conf ]]
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + local -r worker_restart_drop_in=/etc/systemd/system/common/worker-restart.conf
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + [[ ! -f /etc/systemd/system/common/worker-restart.conf ]]
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + local -r drop_in_dir=/etc/systemd/system/hive-server2.service.d
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + mkdir -p /etc/systemd/system/hive-server2.service.d
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + local props
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: ++ systemctl show hive-server2.service -p Restart,RemainAfterExit
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + props='Restart=no
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: RemainAfterExit=no'
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + [[ spark-history-server != \h\a\d\o\o\p\-\h\d\f\s\-\d\a\t\a\n\o\d\e ]]
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + [[ spark-history-server != \h\a\d\o\o\p\-\y\a\r\n\-\n\o\d\e\m\a\n\a\g\e\r ]]
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + [[ Restart=no
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: RemainAfterExit=no == *\R\e\s\t\a\r\t\=\n\o* ]]
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + [[ Restart=no
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: RemainAfterExit=no == *\R\e\m\a\i\n\A\f\t\e\r\E\x\i\t\=\n\o* ]]
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + ln -s -f /etc/systemd/system/common/restart.conf /etc/systemd/system/spark-history-server.service.d
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + local -r gate_start_on_agent_success_drop_in=/etc/systemd/system/common/agent-gate.conf
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + [[ ! -f /etc/systemd/system/common/agent-gate.conf ]]
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + [[ spark-history-server == \h\a\d\o\o\p\-\h\d\f\s\-\d\a\t\a\n\o\d\e ]]
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + [[ spark-history-server == \h\a\d\o\o\p\-\y\a\r\n\-\n\o\d\e\m\a\n\a\g\e\r ]]
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + retry_constant systemctl start spark-history-server
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + retry_constant_custom 300 1 systemctl start spark-history-server
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + local -r max_retry_time=300
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + local -r retry_delay=1
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + cmd=("${@:3}")
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + local -r cmd
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + local -r max_retries=300
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: + set +x
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: About to run 'systemctl start spark-history-server' with retries...
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + props='Restart=no
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: RemainAfterExit=no'
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + [[ hive-server2 != \h\a\d\o\o\p\-\h\d\f\s\-\d\a\t\a\n\o\d\e ]]
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + [[ hive-server2 != \h\a\d\o\o\p\-\y\a\r\n\-\n\o\d\e\m\a\n\a\g\e\r ]]
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + [[ Restart=no
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: RemainAfterExit=no == *\R\e\s\t\a\r\t\=\n\o* ]]
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + [[ Restart=no
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: RemainAfterExit=no == *\R\e\m\a\i\n\A\f\t\e\r\E\x\i\t\=\n\o* ]]
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + ln -s -f /etc/systemd/system/common/restart.conf /etc/systemd/system/hive-server2.service.d
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:43 post-hdfs-component-spark[10747]: Warning: The unit file, source configuration file or drop-ins of spark-history-server.service changed on disk. Run 'systemctl daemon-reload' to reload units.
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + local -r gate_start_on_agent_success_drop_in=/etc/systemd/system/common/agent-gate.conf
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + [[ ! -f /etc/systemd/system/common/agent-gate.conf ]]
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + [[ hive-server2 == \h\a\d\o\o\p\-\h\d\f\s\-\d\a\t\a\n\o\d\e ]]
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + [[ hive-server2 == \h\a\d\o\o\p\-\y\a\r\n\-\n\o\d\e\m\a\n\a\g\e\r ]]
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + retry_constant systemctl start hive-server2
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + retry_constant_custom 300 1 systemctl start hive-server2
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + local -r max_retry_time=300
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + local -r retry_delay=1
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + cmd=("${@:3}")
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + local -r cmd
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + local -r max_retries=300
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: + set +x
+<13>Mar 23 02:05:43 google-dataproc-startup[10691]: <13>Mar 23 02:05:43 post-hdfs-activate-component-hive-server2[10700]: About to run 'systemctl start hive-server2' with retries...
+<13>Mar 23 02:05:44 google-dataproc-startup[10691]: <13>Mar 23 02:05:44 post-hdfs-activate-component-hive-server2[10700]: Warning: The unit file, source configuration file or drop-ins of hive-server2.service changed on disk. Run 'systemctl daemon-reload' to reload units.
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: systemctl start hive-server2 succeeded.
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + return 0
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + local thrift_port
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++ get_property_in_xml /etc/hive/conf/hive-site.xml hive.server2.thrift.port 10000
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++ local -r path=/etc/hive/conf/hive-site.xml
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++ local -r property=hive.server2.thrift.port
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++ local -r default_value=10000
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++ local val
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: +++ bdconfig get_property_value --configuration_file /etc/hive/conf/hive-site.xml --name hive.server2.thrift.port
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:47 post-hdfs-component-spark[10747]: systemctl start spark-history-server succeeded.
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-spark[10705]: <13>Mar 23 02:05:47 post-hdfs-component-spark[10747]: + return 0
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-spark[10705]: + [[ 0 -ne 0 ]]
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-spark[10705]: + touch /tmp/dataproc/components/post-hdfs/spark.done
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + (( status != 0 ))
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + tee /tmp/dataproc/commands/10705.done
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + echo 'Command cmd=[post_hdfs_activate_component spark] pid=10705 exited with 0'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: Command cmd=[post_hdfs_activate_component spark] pid=10705 exited with 0
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + (( ++i ))
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + (( i < 8 ))
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + local pid=10703
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + local 'cmd=post_hdfs_activate_component mysql'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + loginfo 'Waiting on pid=10703 cmd=[post_hdfs_activate_component mysql]'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + echo 'Waiting on pid=10703 cmd=[post_hdfs_activate_component mysql]'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: Waiting on pid=10703 cmd=[post_hdfs_activate_component mysql]
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + echo 'post_hdfs_activate_component mysql'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + local status=0
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + wait 10703
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + (( status != 0 ))
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + echo 'Command cmd=[post_hdfs_activate_component mysql] pid=10703 exited with 0'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + tee /tmp/dataproc/commands/10703.done
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: Command cmd=[post_hdfs_activate_component mysql] pid=10703 exited with 0
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + (( ++i ))
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + (( i < 8 ))
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + local pid=10702
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + local 'cmd=post_hdfs_activate_component miniconda3'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + loginfo 'Waiting on pid=10702 cmd=[post_hdfs_activate_component miniconda3]'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + echo 'Waiting on pid=10702 cmd=[post_hdfs_activate_component miniconda3]'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: Waiting on pid=10702 cmd=[post_hdfs_activate_component miniconda3]
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + echo 'post_hdfs_activate_component miniconda3'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + local status=0
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + wait 10702
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + (( status != 0 ))
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + tee /tmp/dataproc/commands/10702.done
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + echo 'Command cmd=[post_hdfs_activate_component miniconda3] pid=10702 exited with 0'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: Command cmd=[post_hdfs_activate_component miniconda3] pid=10702 exited with 0
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + (( ++i ))
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + (( i < 8 ))
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + local pid=10701
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + local 'cmd=post_hdfs_activate_component mapreduce'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + loginfo 'Waiting on pid=10701 cmd=[post_hdfs_activate_component mapreduce]'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + echo 'Waiting on pid=10701 cmd=[post_hdfs_activate_component mapreduce]'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: Waiting on pid=10701 cmd=[post_hdfs_activate_component mapreduce]
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + echo 'post_hdfs_activate_component mapreduce'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + local status=0
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + wait 10701
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + (( status != 0 ))
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + tee /tmp/dataproc/commands/10701.done
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + echo 'Command cmd=[post_hdfs_activate_component mapreduce] pid=10701 exited with 0'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: Command cmd=[post_hdfs_activate_component mapreduce] pid=10701 exited with 0
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + (( ++i ))
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + (( i < 8 ))
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + local pid=10700
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + local 'cmd=post_hdfs_activate_component hive-server2'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + loginfo 'Waiting on pid=10700 cmd=[post_hdfs_activate_component hive-server2]'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + echo 'Waiting on pid=10700 cmd=[post_hdfs_activate_component hive-server2]'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: Waiting on pid=10700 cmd=[post_hdfs_activate_component hive-server2]
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + echo 'post_hdfs_activate_component hive-server2'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + local status=0
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: + wait 10700
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++ val=None
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++ [[ None == \N\o\n\e ]]
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++ val=10000
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++ echo 10000
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + thrift_port=10000
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + local timeout
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++ get_dataproc_property_or_default startup.component.service-binding-timeout.hive-server2 300
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++ local -r property_name=startup.component.service-binding-timeout.hive-server2
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++ local -r default_value=300
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++ local actual_value
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: +++ get_dataproc_property startup.component.service-binding-timeout.hive-server2
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: +++ local -r property_name=startup.component.service-binding-timeout.hive-server2
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: +++ local property_value
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++++ get_java_property /etc/google-dataproc/dataproc.properties startup.component.service-binding-timeout.hive-server2
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++++ local -r property_file=/etc/google-dataproc/dataproc.properties
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++++ local -r property_name=startup.component.service-binding-timeout.hive-server2
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++++ local property_value
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: +++++ sed -r 's/\\([#!=:])/\1/g'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: +++++ tail -n 1
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: +++++ grep '^startup.component.service-binding-timeout.hive-server2=' /etc/google-dataproc/dataproc.properties
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: +++++ cut -d = -f 2-
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++++ property_value=
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++++ echo ''
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: +++ property_value=
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: +++ echo ''
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++ actual_value=
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++ [[ -n '' ]]
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: ++ echo 300
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + timeout=300
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + wait_for_port hive-server2 student-00-a35f8972365f-qwiklab-m 10000 300
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + local -r name=hive-server2
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + local -r host=student-00-a35f8972365f-qwiklab-m
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + local -r port=10000
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + local -r timeout=300
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + local -r capped_timeout=300
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + loginfo 'Waiting 300 seconds for service to come up on host=student-00-a35f8972365f-qwiklab-m port=10000 name=hive-server2.'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + echo 'Waiting 300 seconds for service to come up on host=student-00-a35f8972365f-qwiklab-m port=10000 name=hive-server2.'
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: Waiting 300 seconds for service to come up on host=student-00-a35f8972365f-qwiklab-m port=10000 name=hive-server2.
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + retry_constant_custom 300 1 nc -v -z -w 1 student-00-a35f8972365f-qwiklab-m 10000
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + local -r max_retry_time=300
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + local -r retry_delay=1
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + cmd=("${@:3}")
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + local -r cmd
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + local -r max_retries=300
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: + set +x
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: About to run 'nc -v -z -w 1 student-00-a35f8972365f-qwiklab-m 10000' with retries...
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: nc: connect to student-00-a35f8972365f-qwiklab-m port 10000 (tcp) failed: Connection refused
+<13>Mar 23 02:05:47 google-dataproc-startup[10691]: <13>Mar 23 02:05:47 post-hdfs-activate-component-hive-server2[10700]: 'nc -v -z -w 1 student-00-a35f8972365f-qwiklab-m 10000' attempt 1 failed! Sleeping 1s.
+<13>Mar 23 02:05:48 google-dataproc-startup[10691]: <13>Mar 23 02:05:48 post-hdfs-activate-component-hive-server2[10700]: nc: connect to student-00-a35f8972365f-qwiklab-m port 10000 (tcp) failed: Connection refused
+<13>Mar 23 02:05:49 google-dataproc-startup[10691]: <13>Mar 23 02:05:49 post-hdfs-activate-component-hive-server2[10700]: nc: connect to student-00-a35f8972365f-qwiklab-m port 10000 (tcp) failed: Connection refused
+<13>Mar 23 02:05:50 google-dataproc-startup[10691]: <13>Mar 23 02:05:50 post-hdfs-activate-component-hive-server2[10700]: nc: connect to student-00-a35f8972365f-qwiklab-m port 10000 (tcp) failed: Connection refused
+<13>Mar 23 02:05:51 google-dataproc-startup[10691]: <13>Mar 23 02:05:51 post-hdfs-activate-component-hive-server2[10700]: nc: connect to student-00-a35f8972365f-qwiklab-m port 10000 (tcp) failed: Connection refused
+<13>Mar 23 02:05:52 google-dataproc-startup[10691]: <13>Mar 23 02:05:52 post-hdfs-activate-component-hive-server2[10700]: nc: connect to student-00-a35f8972365f-qwiklab-m port 10000 (tcp) failed: Connection refused
+<13>Mar 23 02:05:53 google-dataproc-startup[10691]: <13>Mar 23 02:05:53 post-hdfs-activate-component-hive-server2[10700]: nc: connect to student-00-a35f8972365f-qwiklab-m port 10000 (tcp) failed: Connection refused
+<13>Mar 23 02:05:54 google-dataproc-startup[10691]: <13>Mar 23 02:05:54 post-hdfs-activate-component-hive-server2[10700]: nc: connect to student-00-a35f8972365f-qwiklab-m port 10000 (tcp) failed: Connection refused
+<13>Mar 23 02:05:55 google-dataproc-startup[10691]: <13>Mar 23 02:05:55 post-hdfs-activate-component-hive-server2[10700]: nc: connect to student-00-a35f8972365f-qwiklab-m port 10000 (tcp) failed: Connection refused
+<13>Mar 23 02:05:56 google-dataproc-startup[10691]: <13>Mar 23 02:05:56 post-hdfs-activate-component-hive-server2[10700]: Connection to student-00-a35f8972365f-qwiklab-m 10000 port [tcp/webmin] succeeded!
+<13>Mar 23 02:05:56 google-dataproc-startup[10691]: <13>Mar 23 02:05:56 post-hdfs-activate-component-hive-server2[10700]: nc -v -z -w 1 student-00-a35f8972365f-qwiklab-m 10000 succeeded.
+<13>Mar 23 02:05:56 google-dataproc-startup[10691]: <13>Mar 23 02:05:56 post-hdfs-activate-component-hive-server2[10700]: + return 0
+<13>Mar 23 02:05:56 google-dataproc-startup[10691]: <13>Mar 23 02:05:56 post-hdfs-activate-component-hive-server2[10700]: + loginfo 'Service up on host=student-00-a35f8972365f-qwiklab-m port=10000 name=hive-server2.'
+<13>Mar 23 02:05:56 google-dataproc-startup[10691]: <13>Mar 23 02:05:56 post-hdfs-activate-component-hive-server2[10700]: + echo 'Service up on host=student-00-a35f8972365f-qwiklab-m port=10000 name=hive-server2.'
+<13>Mar 23 02:05:56 google-dataproc-startup[10691]: <13>Mar 23 02:05:56 post-hdfs-activate-component-hive-server2[10700]: Service up on host=student-00-a35f8972365f-qwiklab-m port=10000 name=hive-server2.
+<13>Mar 23 02:05:56 google-dataproc-startup[10691]: <13>Mar 23 02:05:56 post-hdfs-activate-component-hive-server2[10700]: + [[ 0 -ne 0 ]]
+<13>Mar 23 02:05:56 google-dataproc-startup[10691]: <13>Mar 23 02:05:56 post-hdfs-activate-component-hive-server2[10700]: + touch /tmp/dataproc/components/post-hdfs/hive-server2.done
+<13>Mar 23 02:05:56 google-dataproc-startup[10691]: + (( status != 0 ))
+<13>Mar 23 02:05:56 google-dataproc-startup[10691]: + tee /tmp/dataproc/commands/10700.done
+<13>Mar 23 02:05:56 google-dataproc-startup[10691]: + echo 'Command cmd=[post_hdfs_activate_component hive-server2] pid=10700 exited with 0'
+<13>Mar 23 02:05:56 google-dataproc-startup[10691]: Command cmd=[post_hdfs_activate_component hive-server2] pid=10700 exited with 0
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + (( ++i ))
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + (( i < 8 ))
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + local pid=10699
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + local 'cmd=post_hdfs_activate_component hive-metastore'
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + loginfo 'Waiting on pid=10699 cmd=[post_hdfs_activate_component hive-metastore]'
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + echo 'Waiting on pid=10699 cmd=[post_hdfs_activate_component hive-metastore]'
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: Waiting on pid=10699 cmd=[post_hdfs_activate_component hive-metastore]
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + echo 'post_hdfs_activate_component hive-metastore'
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + local status=0
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + wait 10699
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + (( status != 0 ))
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + tee /tmp/dataproc/commands/10699.done
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + echo 'Command cmd=[post_hdfs_activate_component hive-metastore] pid=10699 exited with 0'
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: Command cmd=[post_hdfs_activate_component hive-metastore] pid=10699 exited with 0
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + (( ++i ))
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + (( i < 8 ))
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + local pid=10698
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + local 'cmd=post_hdfs_activate_component hdfs'
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + loginfo 'Waiting on pid=10698 cmd=[post_hdfs_activate_component hdfs]'
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + echo 'Waiting on pid=10698 cmd=[post_hdfs_activate_component hdfs]'
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: Waiting on pid=10698 cmd=[post_hdfs_activate_component hdfs]
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + echo 'post_hdfs_activate_component hdfs'
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + local status=0
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + wait 10698
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + (( status != 0 ))
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + tee /tmp/dataproc/commands/10698.done
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + echo 'Command cmd=[post_hdfs_activate_component hdfs] pid=10698 exited with 0'
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: Command cmd=[post_hdfs_activate_component hdfs] pid=10698 exited with 0
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + (( ++i ))
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + (( i < 8 ))
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + BACKGROUND_PROCESSES=()
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + BACKGROUND_COMMANDS=()
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + loginfo 'All done'
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: + echo 'All done'
+<13>Mar 23 02:05:57 google-dataproc-startup[10691]: All done
